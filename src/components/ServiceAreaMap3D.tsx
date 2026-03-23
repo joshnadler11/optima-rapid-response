@@ -16,7 +16,7 @@ const pins = [
 
 /* ─── Terrain ─── */
 function Terrain() {
-  const meshRef = useRef<THREE.Mesh>(null!);
+  const meshRef = useRef<THREE.Group>(null!);
   const geo = useMemo(() => {
     const g = new THREE.PlaneGeometry(10, 8, 60, 48);
     const pos = g.attributes.position;
