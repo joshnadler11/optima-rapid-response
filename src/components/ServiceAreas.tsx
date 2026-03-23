@@ -1,36 +1,82 @@
+import { lazy, Suspense, useRef, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import { useIsMobile } from '@/hooks/use-mobile';
 
-const cities = ['Montreal', 'Laval', 'Longueuil', 'Brossard', 'South Shore', 'North Shore'];
+const ServiceAreaMap3D = lazy(() => import('./ServiceAreaMap3D'));
 
-const ServiceAreas = () => (
-  <section className="py-20 md:py-28 bg-background">
-    <div className="container">
-      <ScrollReveal className="text-center mb-14">
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
-          We Serve All of Greater Montreal
-        </h2>
-      </ScrollReveal>
+const cities = [
+  { name: 'Montreal', pos: [0, 0] },
+  { name: 'Laval', pos: [0, 1.5] },
+  { name: 'Longueuil', pos: [0.5, -1.2] },
+  { name: 'Brossard', pos: [-0.8, -1.5] },
+  { name: 'South Shore', pos: [1.2, -2] },
+  { name: 'North Shore', pos: [-1, 2] },
+];
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
-        {cities.map((city, i) => (
-          <ScrollReveal key={city} delay={i * 0.08}>
-            <div className="bg-background border border-border rounded-lg p-5 text-center hover:bg-[#F0F7F4] hover:shadow-md transition-all duration-300 group">
-              <MapPin className="w-6 h-6 text-accent mx-auto mb-2 transition-transform duration-300 group-hover:scale-110" />
-              <h3 className="font-display font-bold text-primary" style={{ fontSize: '18px' }}>{city}</h3>
-              <p className="text-muted-foreground text-xs mt-1">Same-day service available</p>
+const ServiceAreas = () => {
+  const isMobile = useIsMobile();
+
+  return (
+    <section className="py-12 md:py-20 bg-background">
+      <div className="container">
+        <ScrollReveal className="text-center mb-10 md:mb-14" variant="fade-scale">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+            We Serve All of Greater Montreal
+          </h2>
+        </ScrollReveal>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+          {/* 3D Map */}
+          <ScrollReveal variant="slide-left" className="order-2 lg:order-1">
+            <div
+              className="relative rounded-xl overflow-hidden bg-primary"
+              style={{ height: isMobile ? '300px' : '500px' }}
+            >
+              <Suspense
+                fallback={
+                  <div className="w-full h-full flex items-center justify-center">
+                    <div className="text-primary-foreground/50 font-medium text-sm">Loading map...</div>
+                  </div>
+                }
+              >
+                <ServiceAreaMap3D />
+              </Suspense>
             </div>
           </ScrollReveal>
-        ))}
-      </div>
 
-      <ScrollReveal className="text-center mt-8">
-        <p className="text-muted-foreground text-sm italic">
-          Don't see your city? Call us — we likely cover it.
-        </p>
-      </ScrollReveal>
-    </div>
-  </section>
-);
+          {/* City list */}
+          <div className="order-1 lg:order-2 space-y-3">
+            {cities.map((city, i) => (
+              <ScrollReveal key={city.name} delay={i * 0.08} variant="slide-right">
+                <div className="flex items-center justify-between bg-background border border-border rounded-lg p-4 md:p-5 hover:bg-[#F0F7F4] hover:shadow-md transition-all duration-300 group">
+                  <div className="flex items-center gap-3">
+                    <MapPin className="w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
+                    <div>
+                      <h3 className="font-display font-bold text-primary text-base md:text-lg">{city.name}</h3>
+                      <p className="text-muted-foreground text-xs">Same-day service available</p>
+                    </div>
+                  </div>
+                  <Link
+                    to="/quote"
+                    className="text-accent font-bold text-sm hover:underline transition-colors flex-shrink-0"
+                  >
+                    Book Now →
+                  </Link>
+                </div>
+              </ScrollReveal>
+            ))}
+            <ScrollReveal delay={0.5}>
+              <p className="text-muted-foreground text-sm italic text-center mt-4">
+                Don't see your city? Call us — we likely cover it.
+              </p>
+            </ScrollReveal>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
 
 export default ServiceAreas;
