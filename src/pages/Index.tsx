@@ -2,6 +2,7 @@ import EmergencyBar from '@/components/EmergencyBar';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import TrustBadges from '@/components/TrustBadges';
+import StatsCounterSection from '@/components/StatsCounterSection';
 import ServicesSection from '@/components/ServicesSection';
 import HowItWorks from '@/components/HowItWorks';
 import PestEliminationSection from '@/components/PestEliminationSection';
@@ -20,6 +21,7 @@ const Index = () => (
     <Navbar />
     <Hero />
     <TrustBadges />
+    <StatsCounterSection />
     <ServicesSection />
     <HowItWorks />
     <PestEliminationSection />

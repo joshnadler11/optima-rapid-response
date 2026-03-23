@@ -20,9 +20,9 @@ const reviews = [
 ];
 
 const Testimonials = () => (
-  <section className="py-20 md:py-28 bg-background">
+  <section className="py-12 md:py-20 bg-background">
     <div className="container">
-      <ScrollReveal className="text-center mb-14">
+      <ScrollReveal className="text-center mb-14" variant="fade-scale">
         <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
           What Our Montreal Clients Say
         </h2>
@@ -30,7 +30,7 @@ const Testimonials = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {reviews.map((r, i) => (
-          <ScrollReveal key={r.name} delay={i * 0.1}>
+          <ScrollReveal key={r.name} delay={i * 0.15} variant="flip-y" duration={0.5}>
             <div className="bg-secondary rounded-lg p-9 border-l-4 border-primary h-full flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="flex gap-1 mb-5">
                 {[...Array(5)].map((_, j) => (
