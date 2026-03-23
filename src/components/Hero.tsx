@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Phone } from 'lucide-react';
+import { Phone, Star } from 'lucide-react';
 import heroImg from '@/assets/hero-home.jpg';
 
 const Hero = () => {
@@ -44,6 +44,16 @@ const Hero = () => {
             <Phone className="w-5 h-5" />
             Call (514) 458-0805
           </a>
+        </div>
+
+        {/* Star rating badge */}
+        <div className="animate-hero-in delay-700 flex items-center justify-center gap-2 mb-4">
+          <div className="flex gap-0.5">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 fill-accent text-accent" />
+            ))}
+          </div>
+          <span className="text-primary-foreground/90 text-sm font-medium">500+ Happy Montreal Clients</span>
         </div>
 
         <p className="animate-hero-in delay-700 text-green-300 text-sm font-medium">

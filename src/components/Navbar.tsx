@@ -29,11 +29,11 @@ const Navbar = () => {
       }`}
     >
       <div className="container flex items-center justify-between h-16 md:h-[72px]">
-        <Link to="/" className="flex items-center gap-2">
-          <span className={`font-display text-xl md:text-2xl font-bold tracking-tight ${scrolled ? 'text-primary' : 'text-primary-foreground'}`}>
+        <Link to="/" className="flex items-center gap-1.5">
+          <span className={`font-display text-2xl md:text-[26px] font-bold tracking-tight ${scrolled ? 'text-primary' : 'text-primary-foreground'}`}>
             OPTIMA
           </span>
-          <span className={`hidden sm:inline font-display text-xl md:text-2xl font-light tracking-tight ${scrolled ? 'text-accent' : 'text-accent'}`}>
+          <span className="font-display text-2xl md:text-[26px] font-bold tracking-tight text-accent">
             EXTERMINATION
           </span>
         </Link>
