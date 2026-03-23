@@ -1,31 +1,29 @@
 import EmergencyBar from '@/components/EmergencyBar';
 import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import TrustBadges from '@/components/TrustBadges';
 import ServicesSection from '@/components/ServicesSection';
-import HowItWorks from '@/components/HowItWorks';
 import PriceBeatBanner from '@/components/PriceBeatBanner';
-import Testimonials from '@/components/Testimonials';
-import ServiceAreas from '@/components/ServiceAreas';
 import ContactQuoteForm from '@/components/ContactQuoteForm';
 import SiteFooter from '@/components/SiteFooter';
 import FloatingButtons from '@/components/FloatingButtons';
 
-const Index = () => (
+const Services = () => (
   <>
     <EmergencyBar />
     <Navbar />
-    <Hero />
-    <TrustBadges />
+    <section className="bg-primary py-20">
+      <div className="container text-center">
+        <h1 className="font-display text-4xl md:text-5xl font-bold text-primary-foreground mb-4">Our Services</h1>
+        <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto">
+          Professional pest control solutions for homes and businesses across Greater Montreal.
+        </p>
+      </div>
+    </section>
     <ServicesSection />
-    <HowItWorks />
     <PriceBeatBanner />
-    <Testimonials />
-    <ServiceAreas />
     <ContactQuoteForm />
     <SiteFooter />
     <FloatingButtons />
   </>
 );
 
-export default Index;
+export default Services;
