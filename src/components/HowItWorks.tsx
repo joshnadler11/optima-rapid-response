@@ -32,7 +32,7 @@ const HowItWorks = () => (
         {steps.map((step, i) => (
           <ScrollReveal key={step.num} delay={i * 0.15} className="flex items-start gap-4 md:gap-0 md:flex-col md:items-center md:text-center relative">
             <div>
-              <span className="font-display text-5xl md:text-6xl font-bold text-accent/20 leading-none">{step.num}</span>
+              <span className="font-display text-5xl md:text-6xl font-bold text-accent leading-none">{step.num}</span>
             </div>
             <div className="md:mt-4">
               <h3 className="font-display text-xl font-bold text-primary mb-2">{step.title}</h3>

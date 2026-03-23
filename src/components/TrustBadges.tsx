@@ -8,13 +8,13 @@ const badges = [
 ];
 
 const TrustBadges = () => (
-  <section className="bg-primary py-6">
-    <div className="container">
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-0">
+  <section className="bg-primary" style={{ height: '90px' }}>
+    <div className="container h-full">
+      <div className="grid grid-cols-2 md:grid-cols-4 h-full">
         {badges.map((badge) => (
-          <div key={badge} className="flex items-center justify-center gap-2.5 py-2">
-            <CheckCircle className="w-5 h-5 text-accent flex-shrink-0" />
-            <span className="text-primary-foreground font-bold text-sm md:text-base">{badge}</span>
+          <div key={badge} className="flex items-center justify-center gap-3">
+            <CheckCircle className="w-6 h-6 text-accent flex-shrink-0" strokeWidth={2.5} />
+            <span className="text-primary-foreground font-bold text-sm md:text-lg tracking-wide">{badge}</span>
           </div>
         ))}
       </div>
