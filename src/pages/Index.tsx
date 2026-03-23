@@ -11,9 +11,11 @@ import ServiceAreas from '@/components/ServiceAreas';
 import ContactQuoteForm from '@/components/ContactQuoteForm';
 import SiteFooter from '@/components/SiteFooter';
 import FloatingButtons from '@/components/FloatingButtons';
+import LoadingScreen from '@/components/LoadingScreen';
 
 const Index = () => (
   <>
+    <LoadingScreen />
     <EmergencyBar />
     <Navbar />
     <Hero />
