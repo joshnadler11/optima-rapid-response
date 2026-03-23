@@ -32,12 +32,16 @@ function Insect({
   triggerTime: React.MutableRefObject<number>;
 }) {
   const ref = useRef<THREE.Group>(null!);
-  const mat = useMemo(() => new THREE.MeshStandardMaterial({ color: BUG_COLOR, roughness: 0.4, metalness: 0.3 }), []);
+  const legRefs = useRef<THREE.Mesh[]>([]);
+  const bodyMat = useMemo(() => new THREE.MeshStandardMaterial({ color: BUG_COLOR, roughness: 0.35, metalness: 0.4 }), []);
+  const shellMat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#2A1506', roughness: 0.25, metalness: 0.6 }), []);
+  const eyeMat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#1a0000', roughness: 0.1, metalness: 0.8, emissive: '#330000', emissiveIntensity: 0.3 }), []);
+  const antennaMat = useMemo(() => new THREE.MeshStandardMaterial({ color: '#4A2A0A', roughness: 0.5, metalness: 0.2 }), []);
+
   const crawlX = useRef(startX);
   const scattered = useRef(false);
   const scatterStart = useRef(0);
   const scatterPos = useRef(new THREE.Vector3());
-  const scatterRot = useRef(new THREE.Euler());
 
   useFrame((state) => {
     if (!ref.current) return;
@@ -48,22 +52,25 @@ function Insect({
       scattered.current = true;
       scatterStart.current = t;
       scatterPos.current.copy(ref.current.position);
-      scatterRot.current.copy(ref.current.rotation);
     }
 
     if (!scattered.current) {
-      // Crawling loop
       crawlX.current += speed * 0.008;
       if (crawlX.current > 7) crawlX.current = -7;
       ref.current.position.set(crawlX.current, -1.4, startZ);
-      // Subtle bobbing
-      ref.current.position.y += Math.sin(t * 3 + phase) * 0.03;
+      ref.current.position.y += Math.sin(t * 3 + phase) * 0.02;
       ref.current.rotation.y = speed > 0 ? 0 : Math.PI;
+      // Animate legs — alternating tripod gait
+      legRefs.current.forEach((leg, i) => {
+        if (!leg) return;
+        const legPhase = i < 3 ? 0 : Math.PI;
+        const swing = Math.sin(t * 12 + phase + legPhase) * 0.3;
+        leg.rotation.x = swing;
+      });
     } else {
-      // Scatter animation — fly off in 1.2s
       const elapsed = t - scatterStart.current;
       const progress = Math.min(elapsed / 1.2, 1);
-      const eased = progress * progress; // accelerate out
+      const eased = progress * progress;
       ref.current.position.set(
         scatterPos.current.x + scatterDir[0] * eased * 12,
         scatterPos.current.y + scatterDir[1] * eased * 8 + Math.sin(progress * Math.PI) * 2,
@@ -71,36 +78,86 @@ function Insect({
       );
       ref.current.rotation.x += 0.15;
       ref.current.rotation.z += 0.12;
+      // Legs flail wildly
+      legRefs.current.forEach((leg, i) => {
+        if (!leg) return;
+        leg.rotation.x = Math.sin(t * 25 + i) * 0.8;
+        leg.rotation.z = Math.sin(t * 20 + i * 0.7) * 0.4;
+      });
       if (progress >= 1) {
         ref.current.visible = false;
       }
     }
   });
 
-  const legPositions: [number, number, number, number][] = [
-    [-0.12, -0.06, 0.08, -0.5],
-    [0, -0.06, 0.08, -0.5],
-    [0.12, -0.06, 0.08, -0.5],
-    [-0.12, -0.06, -0.08, 0.5],
-    [0, -0.06, -0.08, 0.5],
-    [0.12, -0.06, -0.08, 0.5],
+  // Leg configs: [xOffset on body, side (1=right, -1=left), longitudinal angle]
+  const legConfigs = [
+    { x: -0.1, side: 1, angle: -0.3 },
+    { x: 0.0, side: 1, angle: 0 },
+    { x: 0.1, side: 1, angle: 0.3 },
+    { x: -0.1, side: -1, angle: -0.3 },
+    { x: 0.0, side: -1, angle: 0 },
+    { x: 0.1, side: -1, angle: 0.3 },
   ];
 
   return (
-    <group ref={ref} scale={1.1}>
-      {/* Body - elongated capsule */}
-      <mesh material={mat} rotation={[0, 0, Math.PI / 2]}>
-        <capsuleGeometry args={[0.06, 0.28, 8, 12]} />
+    <group ref={ref} scale={1.3}>
+      {/* Abdomen — larger rear segment */}
+      <mesh material={shellMat} position={[-0.1, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <capsuleGeometry args={[0.08, 0.18, 8, 16]} />
+      </mesh>
+      {/* Thorax — middle segment */}
+      <mesh material={bodyMat} position={[0.08, 0.005, 0]} rotation={[0, 0, Math.PI / 2]}>
+        <capsuleGeometry args={[0.055, 0.08, 8, 12]} />
       </mesh>
       {/* Head */}
-      <mesh material={mat} position={[0.22, 0.01, 0]}>
-        <sphereGeometry args={[0.06, 8, 8]} />
+      <mesh material={bodyMat} position={[0.2, 0.0, 0]}>
+        <sphereGeometry args={[0.05, 10, 10]} />
       </mesh>
-      {/* 6 Legs */}
-      {legPositions.map(([x, y, z, rotZ], i) => (
-        <mesh key={i} position={[x, y, z]} rotation={[0, 0, rotZ]} material={mat}>
-          <cylinderGeometry args={[0.008, 0.008, 0.14, 4]} />
+      {/* Eyes — two small shiny spheres */}
+      <mesh material={eyeMat} position={[0.23, 0.02, 0.03]}>
+        <sphereGeometry args={[0.015, 8, 8]} />
+      </mesh>
+      <mesh material={eyeMat} position={[0.23, 0.02, -0.03]}>
+        <sphereGeometry args={[0.015, 8, 8]} />
+      </mesh>
+      {/* Antennae — two curved thin cylinders */}
+      <group position={[0.24, 0.03, 0.02]} rotation={[0.3, 0.4, 0.6]}>
+        <mesh material={antennaMat}>
+          <cylinderGeometry args={[0.004, 0.003, 0.16, 4]} />
         </mesh>
+      </group>
+      <group position={[0.24, 0.03, -0.02]} rotation={[-0.3, -0.4, 0.6]}>
+        <mesh material={antennaMat}>
+          <cylinderGeometry args={[0.004, 0.003, 0.16, 4]} />
+        </mesh>
+      </group>
+      {/* Wing casings — two flat ellipses on top of abdomen */}
+      <mesh material={shellMat} position={[-0.08, 0.07, 0.02]} rotation={[0.15, 0, 0.1]} scale={[1, 0.15, 0.5]}>
+        <sphereGeometry args={[0.1, 8, 8]} />
+      </mesh>
+      <mesh material={shellMat} position={[-0.08, 0.07, -0.02]} rotation={[-0.15, 0, 0.1]} scale={[1, 0.15, 0.5]}>
+        <sphereGeometry args={[0.1, 8, 8]} />
+      </mesh>
+      {/* 6 Legs — jointed look with two segments each */}
+      {legConfigs.map((cfg, i) => (
+        <group
+          key={i}
+          position={[cfg.x, -0.04, cfg.side * 0.05]}
+          rotation={[0, cfg.angle, cfg.side * -0.8]}
+          ref={(el) => { if (el) legRefs.current[i] = el as unknown as THREE.Mesh; }}
+        >
+          {/* Upper leg */}
+          <mesh material={bodyMat} position={[0, -0.04, 0]}>
+            <cylinderGeometry args={[0.006, 0.005, 0.08, 4]} />
+          </mesh>
+          {/* Lower leg — angled outward */}
+          <group position={[0, -0.08, cfg.side * 0.02]} rotation={[cfg.side * 0.6, 0, 0]}>
+            <mesh material={bodyMat} position={[0, -0.04, 0]}>
+              <cylinderGeometry args={[0.005, 0.003, 0.09, 4]} />
+            </mesh>
+          </group>
+        </group>
       ))}
     </group>
   );
