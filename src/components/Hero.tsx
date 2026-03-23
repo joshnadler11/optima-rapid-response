@@ -1,0 +1,57 @@
+import { Link } from 'react-router-dom';
+import { Phone } from 'lucide-react';
+import heroImg from '@/assets/hero-home.jpg';
+
+const Hero = () => {
+  return (
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
+      <img
+        src={heroImg}
+        alt="Clean modern home interior"
+        className="absolute inset-0 w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-primary/75" />
+
+      <div className="relative z-10 container text-center py-20 px-4 max-w-4xl">
+        <div className="animate-hero-in">
+          <span className="inline-block bg-accent/20 text-accent-foreground border border-accent/30 px-4 py-1.5 rounded-full text-sm font-semibold mb-6 backdrop-blur-sm">
+            ⭐ Montreal's Most Trusted Pest Control
+          </span>
+        </div>
+
+        <h1 className="animate-hero-in delay-200 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold text-primary-foreground leading-[0.95] tracking-tight mb-6">
+          Fast. Discreet. Guaranteed.
+          <br />
+          <span className="text-accent">Same-Day Pest Control</span> in Montreal.
+        </h1>
+
+        <p className="animate-hero-in delay-300 text-primary-foreground/85 text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
+          Licensed and insured technicians available 24 hours a day, 7 days a week.
+          We beat any competitor quote — guaranteed.
+        </p>
+
+        <div className="animate-hero-in delay-400 flex flex-col sm:flex-row items-center justify-center gap-4 mb-6">
+          <Link
+            to="/quote"
+            className="w-full sm:w-auto flex items-center justify-center bg-accent text-accent-foreground font-bold text-lg px-8 h-14 rounded-md hover:brightness-110 transition-all active:scale-[0.97] shadow-lg shadow-accent/30"
+          >
+            Get a Free Quote
+          </Link>
+          <a
+            href="tel:5144580805"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 bg-primary text-primary-foreground font-bold text-lg px-8 h-14 rounded-md border-2 border-primary-foreground/20 hover:bg-primary/80 transition-all active:scale-[0.97]"
+          >
+            <Phone className="w-5 h-5" />
+            Call (514) 458-0805
+          </a>
+        </div>
+
+        <p className="animate-hero-in delay-500 text-green-300 text-sm font-medium">
+          ✓ We beat any written quote from a licensed competitor — guaranteed.
+        </p>
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
