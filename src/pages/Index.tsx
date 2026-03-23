@@ -4,6 +4,7 @@ import Hero from '@/components/Hero';
 import TrustBadges from '@/components/TrustBadges';
 import ServicesSection from '@/components/ServicesSection';
 import HowItWorks from '@/components/HowItWorks';
+import PestEliminationSection from '@/components/PestEliminationSection';
 import PriceBeatBanner from '@/components/PriceBeatBanner';
 import Testimonials from '@/components/Testimonials';
 import ServiceAreas from '@/components/ServiceAreas';
@@ -19,6 +20,7 @@ const Index = () => (
     <TrustBadges />
     <ServicesSection />
     <HowItWorks />
+    <PestEliminationSection />
     <PriceBeatBanner />
     <Testimonials />
     <ServiceAreas />
