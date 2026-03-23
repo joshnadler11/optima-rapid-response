@@ -1,16 +1,16 @@
+import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { Phone, Star } from 'lucide-react';
-import heroImg from '@/assets/hero-home.jpg';
+
+const HeroBackground3D = lazy(() => import('./HeroBackground3D'));
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden">
-      <img
-        src={heroImg}
-        alt="Clean modern home interior"
-        className="absolute inset-0 w-full h-full object-cover animate-hero-zoom"
-      />
-      <div className="absolute inset-0 bg-primary/85" />
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#0A1F13' }}>
+      {/* 3D canvas background */}
+      <Suspense fallback={null}>
+        <HeroBackground3D />
+      </Suspense>
 
       <div className="relative z-10 container text-center py-20 px-4 max-w-4xl">
         <div className="animate-hero-in">
