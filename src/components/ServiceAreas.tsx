@@ -15,9 +15,9 @@ const ServiceAreas = () => (
       <div className="grid grid-cols-2 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
         {cities.map((city, i) => (
           <ScrollReveal key={city} delay={i * 0.08}>
-            <div className="bg-background border border-border rounded-lg p-5 text-center hover:shadow-md transition-shadow">
-              <MapPin className="w-6 h-6 text-accent mx-auto mb-2" />
-              <h3 className="font-display text-lg font-bold text-primary">{city}</h3>
+            <div className="bg-background border border-border rounded-lg p-5 text-center hover:bg-[#F0F7F4] hover:shadow-md transition-all duration-300 group">
+              <MapPin className="w-6 h-6 text-accent mx-auto mb-2 transition-transform duration-300 group-hover:scale-110" />
+              <h3 className="font-display font-bold text-primary" style={{ fontSize: '18px' }}>{city}</h3>
               <p className="text-muted-foreground text-xs mt-1">Same-day service available</p>
             </div>
           </ScrollReveal>

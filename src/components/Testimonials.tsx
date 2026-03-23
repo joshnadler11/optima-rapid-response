@@ -31,16 +31,16 @@ const Testimonials = () => (
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {reviews.map((r, i) => (
           <ScrollReveal key={r.name} delay={i * 0.1}>
-            <div className="bg-secondary rounded-lg p-7 border-l-4 border-primary h-full flex flex-col">
-              <div className="flex gap-0.5 mb-4">
+            <div className="bg-secondary rounded-lg p-9 border-l-4 border-primary h-full flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+              <div className="flex gap-1 mb-5">
                 {[...Array(5)].map((_, j) => (
-                  <Star key={j} className="w-4 h-4 fill-accent text-accent" />
+                  <Star key={j} className="w-5 h-5 fill-accent text-accent" />
                 ))}
               </div>
-              <p className="text-foreground text-sm leading-relaxed italic flex-1 mb-5">"{r.text}"</p>
+              <p className="text-foreground text-sm leading-relaxed italic flex-1 mb-6">"{r.text}"</p>
               <div>
-                <p className="font-bold text-primary text-sm">{r.name}</p>
-                <p className="text-muted-foreground text-xs">{r.location}</p>
+                <p className="font-bold text-primary text-base">{r.name}</p>
+                <p className="text-muted-foreground text-sm">{r.location}</p>
               </div>
             </div>
           </ScrollReveal>
