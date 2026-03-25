@@ -19,10 +19,8 @@ const Hero = () => {
           </span>
         </div>
 
-        <h1 className="animate-hero-in delay-200 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[0.92] tracking-tight mb-6 font-serif">Optima Extermination
-
-          <br />
-          <span className="text-accent"></span> in Montreal.
+        <h1 className="animate-hero-in delay-200 text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-primary-foreground leading-[0.92] tracking-tight mb-6 font-serif">
+          Optima Extermination
         </h1>
 
         <p className="animate-hero-in delay-400 text-primary-foreground/85 text-lg md:text-xl max-w-2xl mx-auto mb-8 leading-relaxed">
