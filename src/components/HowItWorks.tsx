@@ -1,8 +1,7 @@
 import { ArrowRight } from 'lucide-react';
-import ScrollReveal from './ScrollReveal';
+import ScrollReveal, { usePrefersReducedMotion } from './ScrollReveal';
 import AnimatedCounter from './AnimatedCounter';
 import { useRef, useState, useEffect } from 'react';
-import { usePrefersReducedMotion } from './ScrollReveal';
 
 const steps = [
   { num: 1, title: 'Call or Book Online', desc: 'Contact us anytime. We answer 24 hours a day, 7 days a week and respond within 30 minutes.' },
@@ -34,31 +33,26 @@ const HowItWorks = () => {
   }, [reduced]);
 
   return (
-    <section
-      ref={ref}
-      className="py-12 md:py-20 bg-secondary"
-      style={{
-        willChange: 'transform, opacity',
-        opacity: reduced ? 1 : (triggered ? 1 : undefined),
-      }}
-    >
+    <section ref={ref} className="py-12 md:py-20 bg-secondary">
       <div className="container">
-        <ScrollReveal className="text-center mb-10 md:mb-14" variant="fade-scale" divider>
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
-            Getting Rid of Pests Has Never Been Easier
-          </h2>
-        </ScrollReveal>
-
-        <div className="relative h-px mb-12 mx-auto" style={{ maxWidth: '600px' }}>
+        {/* Full-width center-out divider between Services and How It Works */}
+        <div className="relative h-[2px] mb-10 mx-auto" style={{ maxWidth: '100%' }}>
           <div
-            className="absolute inset-0 bg-accent/40 rounded-full"
+            className="absolute inset-0 rounded-full"
             style={{
-              transform: lineDrawn ? 'scaleX(1)' : 'scaleX(0)',
-              transformOrigin: 'left',
+              background: 'hsl(154, 43%, 18%)',
+              transform: reduced || lineDrawn ? 'scaleX(1)' : 'scaleX(0)',
+              transformOrigin: 'center',
               transition: reduced ? 'none' : 'transform 0.6s cubic-bezier(0.22,1,0.36,1)',
             }}
           />
         </div>
+
+        <ScrollReveal className="text-center mb-10 md:mb-14" variant="fade-scale">
+          <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+            Getting Rid of Pests Has Never Been Easier
+          </h2>
+        </ScrollReveal>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-4 items-start">
           {steps.map((step, i) => (
@@ -76,7 +70,7 @@ const HowItWorks = () => {
             >
               <div>
                 <span className="font-display text-5xl md:text-6xl font-bold text-accent leading-none">
-                  0<AnimatedCounter end={step.num} triggered={triggered} duration={1000} />
+                  0<AnimatedCounter end={step.num} triggered={triggered} duration={1200} />
                 </span>
               </div>
               <div className="md:mt-4">
