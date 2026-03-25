@@ -30,17 +30,14 @@ const TrustBadges = () => {
     return () => observer.disconnect();
   }, []);
 
+  // Badges 0,2 slide from left; badges 1,3 slide from right
+  const getSlideDirection = (i: number) => (i % 2 === 0 ? -40 : 40);
+
   return (
     <section
       ref={ref}
       className="bg-primary"
-      style={{
-        height: '90px',
-        willChange: 'transform, opacity',
-        opacity: reduced || visible ? 1 : 0,
-        transform: reduced || visible ? 'perspective(1000px) rotateX(0deg) translateY(0)' : 'perspective(1000px) rotateX(4deg) translateY(30px)',
-        transition: reduced ? 'none' : 'opacity 0.4s cubic-bezier(0.22,1,0.36,1), transform 0.4s cubic-bezier(0.22,1,0.36,1)',
-      }}
+      style={{ height: '90px' }}
     >
       <div className="container h-full">
         <div className="grid grid-cols-2 md:grid-cols-4 h-full">
@@ -49,9 +46,10 @@ const TrustBadges = () => {
               key={badge}
               className="flex items-center justify-center gap-3"
               style={{
+                willChange: 'transform, opacity',
                 opacity: reduced || visible ? 1 : 0,
-                transform: reduced || visible ? 'translateY(0)' : 'translateY(30px)',
-                transition: reduced ? 'none' : `opacity 0.4s cubic-bezier(0.22,1,0.36,1) ${i * 0.08}s, transform 0.4s cubic-bezier(0.22,1,0.36,1) ${i * 0.08}s`,
+                transform: reduced || visible ? 'translateX(0)' : `translateX(${getSlideDirection(i)}px)`,
+                transition: reduced ? 'none' : `opacity 0.4s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s, transform 0.4s cubic-bezier(0.22,1,0.36,1) ${i * 0.1}s`,
               }}
             >
               <CheckCircle className="w-6 h-6 text-accent flex-shrink-0" strokeWidth={2.5} />

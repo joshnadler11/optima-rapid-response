@@ -18,7 +18,7 @@ const Testimonials = () => (
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {reviews.map((r, i) => (
-          <ScrollReveal key={r.name} delay={i * 0.08} variant="flip-y" duration={0.5}>
+          <ScrollReveal key={r.name} delay={i * 0.15} variant="flip-y" duration={0.55}>
             <div className="bg-secondary rounded-lg p-9 border-l-4 border-primary h-full flex flex-col hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
               <div className="flex gap-1 mb-5">
                 {[...Array(5)].map((_, j) => (
