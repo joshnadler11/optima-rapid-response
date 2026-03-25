@@ -11,16 +11,16 @@ export default function PestEliminationSection() {
   return (
     <ScrollReveal>
       <div className="w-full">
-        <div className="text-center py-10 bg-[hsl(154,43%,8%)]">
+        <ScrollReveal divider className="text-center py-10 bg-[hsl(154,43%,8%)]">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary-foreground tracking-tight">
             We Eliminate Pests. Every Time.
           </h2>
-        </div>
+        </ScrollReveal>
         <Suspense
           fallback={
             <div
               className="w-full flex items-center justify-center"
-              style={{ height: isMobile ? '360px' : '520px', backgroundColor: '#0D2B1E' }}
+              style={{ height: isMobile ? '360px' : '520px', backgroundColor: 'hsl(154, 43%, 8%)' }}
             >
               <div className="text-primary-foreground/50 font-medium">Loading...</div>
             </div>

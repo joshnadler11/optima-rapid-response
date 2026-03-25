@@ -1,4 +1,4 @@
-import { lazy, Suspense, useRef, useState, useCallback } from 'react';
+import { lazy, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
@@ -21,14 +21,13 @@ const ServiceAreas = () => {
   return (
     <section className="py-12 md:py-20 bg-background">
       <div className="container">
-        <ScrollReveal className="text-center mb-10 md:mb-14" variant="fade-scale">
+        <ScrollReveal className="text-center mb-10 md:mb-14" variant="fade-scale" divider>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
             We Serve All of Greater Montreal
           </h2>
         </ScrollReveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
-          {/* 3D Map */}
           <ScrollReveal variant="slide-left" className="order-2 lg:order-1">
             <div
               className="relative rounded-xl overflow-hidden bg-primary"
@@ -46,11 +45,10 @@ const ServiceAreas = () => {
             </div>
           </ScrollReveal>
 
-          {/* City list */}
           <div className="order-1 lg:order-2 space-y-3">
             {cities.map((city, i) => (
-              <ScrollReveal key={city.name} delay={i * 0.08} variant="slide-right">
-                <div className="flex items-center justify-between bg-background border border-border rounded-lg p-4 md:p-5 hover:bg-[#F0F7F4] hover:shadow-md transition-all duration-300 group">
+              <ScrollReveal key={city.name} delay={i * 0.08} variant="spring-drop">
+                <div className="flex items-center justify-between bg-background border border-border rounded-lg p-4 md:p-5 hover:bg-secondary hover:shadow-md transition-all duration-300 group">
                   <div className="flex items-center gap-3">
                     <MapPin className="w-5 h-5 text-accent flex-shrink-0 transition-transform duration-300 group-hover:scale-110" />
                     <div>
@@ -58,10 +56,7 @@ const ServiceAreas = () => {
                       <p className="text-muted-foreground text-xs">Same-day service available</p>
                     </div>
                   </div>
-                  <Link
-                    to="/quote"
-                    className="text-accent font-bold text-sm hover:underline transition-colors flex-shrink-0"
-                  >
+                  <Link to="/quote" className="text-accent font-bold text-sm hover:underline transition-colors flex-shrink-0">
                     Book Now →
                   </Link>
                 </div>
