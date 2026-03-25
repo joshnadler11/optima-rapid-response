@@ -102,14 +102,12 @@ function LocationPin({ name, x, z }: { name: string; x: number; z: number }) {
         <meshBasicMaterial color="#E85D24" transparent opacity={0.3} side={THREE.DoubleSide} />
       </mesh>
       {/* Tooltip */}
-      {hovered && (
-        <Html position={[0, 0.35, 0]} center distanceFactor={5} style={{ pointerEvents: 'none' }}>
-          <div className="bg-primary/95 text-primary-foreground px-3 py-2 rounded-md text-center whitespace-nowrap shadow-lg backdrop-blur-sm">
-            <p className="font-bold text-sm">{name}</p>
-            <p className="text-xs text-primary-foreground/70">Same-day service</p>
-          </div>
-        </Html>
-      )}
+      <Html position={[0, 0.35, 0]} center distanceFactor={5} style={{ pointerEvents: 'none', opacity: hovered ? 1 : 0, transition: 'opacity 0.2s' }}>
+        <div className="bg-primary/95 text-primary-foreground px-3 py-2 rounded-md text-center whitespace-nowrap shadow-lg backdrop-blur-sm">
+          <p className="font-bold text-sm">{name}</p>
+          <p className="text-xs text-primary-foreground/70">Same-day service</p>
+        </div>
+      </Html>
     </group>
   );
 }
