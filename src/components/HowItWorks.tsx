@@ -2,6 +2,7 @@ import { ArrowRight } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 import AnimatedCounter from './AnimatedCounter';
 import { useRef, useState, useEffect } from 'react';
+import { usePrefersReducedMotion } from './ScrollReveal';
 
 const steps = [
   { num: 1, title: 'Call or Book Online', desc: 'Contact us anytime. We answer 24 hours a day, 7 days a week and respond within 30 minutes.' },
@@ -13,6 +14,7 @@ const HowItWorks = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [triggered, setTriggered] = useState(false);
   const [lineDrawn, setLineDrawn] = useState(false);
+  const reduced = usePrefersReducedMotion();
 
   useEffect(() => {
     const el = ref.current;
@@ -21,7 +23,7 @@ const HowItWorks = () => {
       ([entry]) => {
         if (entry.isIntersecting) {
           setLineDrawn(true);
-          setTimeout(() => setTriggered(true), 650);
+          setTimeout(() => setTriggered(true), reduced ? 0 : 650);
           observer.unobserve(entry.target);
         }
       },
@@ -29,25 +31,31 @@ const HowItWorks = () => {
     );
     observer.observe(el);
     return () => observer.disconnect();
-  }, []);
+  }, [reduced]);
 
   return (
-    <section ref={ref} className="py-12 md:py-20 bg-secondary">
+    <section
+      ref={ref}
+      className="py-12 md:py-20 bg-secondary"
+      style={{
+        willChange: 'transform, opacity',
+        opacity: reduced ? 1 : (triggered ? 1 : undefined),
+      }}
+    >
       <div className="container">
-        <ScrollReveal className="text-center mb-10 md:mb-14" variant="fade-scale">
+        <ScrollReveal className="text-center mb-10 md:mb-14" variant="fade-scale" divider>
           <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
             Getting Rid of Pests Has Never Been Easier
           </h2>
         </ScrollReveal>
 
-        {/* Animated divider */}
         <div className="relative h-px mb-12 mx-auto" style={{ maxWidth: '600px' }}>
           <div
             className="absolute inset-0 bg-accent/40 rounded-full"
             style={{
               transform: lineDrawn ? 'scaleX(1)' : 'scaleX(0)',
               transformOrigin: 'left',
-              transition: 'transform 0.6s cubic-bezier(0.16,1,0.3,1)',
+              transition: reduced ? 'none' : 'transform 0.6s cubic-bezier(0.22,1,0.36,1)',
             }}
           />
         </div>
@@ -58,9 +66,12 @@ const HowItWorks = () => {
               key={step.num}
               className="flex items-start gap-4 md:gap-0 md:flex-col md:items-center md:text-center relative"
               style={{
-                opacity: triggered ? 1 : 0,
-                transform: triggered ? 'translateY(0)' : 'translateY(20px)',
-                transition: `opacity 0.6s cubic-bezier(0.16,1,0.3,1) ${i * 0.15}s, transform 0.6s cubic-bezier(0.16,1,0.3,1) ${i * 0.15}s`,
+                willChange: 'transform, opacity',
+                opacity: reduced || triggered ? 1 : 0,
+                transform: reduced || triggered
+                  ? 'perspective(1000px) rotateX(0deg) translateY(0)'
+                  : 'perspective(1000px) rotateX(4deg) translateY(24px)',
+                transition: reduced ? 'none' : `opacity 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.15}s, transform 0.6s cubic-bezier(0.22,1,0.36,1) ${i * 0.15}s`,
               }}
             >
               <div>

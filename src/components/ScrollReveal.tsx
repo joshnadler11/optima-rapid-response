@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, ReactNode, useCallback } from 'react';
+import { useEffect, useRef, useState, ReactNode } from 'react';
 
 /* ─── reduced motion hook ─── */
 function usePrefersReducedMotion() {
@@ -39,6 +39,7 @@ function useInView(threshold = 0.15) {
 
 /* ─── types ─── */
 type AnimVariant =
+  | 'default'
   | 'fade-up'
   | 'fade-scale'
   | 'slide-right'
@@ -53,27 +54,42 @@ interface ScrollRevealProps {
   delay?: number;
   variant?: AnimVariant;
   duration?: number;
+  /** Show a lime-green divider line before content */
+  divider?: boolean;
 }
+
+const EASING = 'cubic-bezier(0.22, 1, 0.36, 1)';
 
 /* ─── variant config ─── */
 function getStyles(variant: AnimVariant, visible: boolean, delay: number, duration: number) {
   const base = {
-    transition: `opacity ${duration}s cubic-bezier(0.16,1,0.3,1) ${delay}s, transform ${duration}s cubic-bezier(0.16,1,0.3,1) ${delay}s, filter ${duration}s cubic-bezier(0.16,1,0.3,1) ${delay}s`,
+    willChange: 'transform, opacity' as const,
+    transition: `opacity ${duration}s ${EASING} ${delay}s, transform ${duration}s ${EASING} ${delay}s, filter ${duration}s ${EASING} ${delay}s`,
   };
 
   switch (variant) {
+    case 'default':
+      return {
+        ...base,
+        opacity: visible ? 1 : 0,
+        transform: visible
+          ? 'perspective(1000px) rotateX(0deg) translateY(0)'
+          : 'perspective(1000px) rotateX(4deg) translateY(24px)',
+      };
     case 'fade-up':
       return {
         ...base,
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(20px)',
+        transform: visible ? 'translateY(0)' : 'translateY(24px)',
         filter: visible ? 'blur(0px)' : 'blur(4px)',
       };
     case 'fade-scale':
       return {
         ...base,
         opacity: visible ? 1 : 0,
-        transform: visible ? 'scale(1)' : 'scale(0.95)',
+        transform: visible
+          ? 'perspective(1000px) rotateX(0deg) scale(1)'
+          : 'perspective(1000px) rotateX(4deg) scale(0.95)',
         filter: visible ? 'blur(0px)' : 'blur(3px)',
       };
     case 'slide-right':
@@ -114,7 +130,9 @@ function getStyles(variant: AnimVariant, visible: boolean, delay: number, durati
       return {
         ...base,
         opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(20px)',
+        transform: visible
+          ? 'perspective(1000px) rotateX(0deg) translateY(0)'
+          : 'perspective(1000px) rotateX(4deg) translateY(24px)',
       };
   }
 }
@@ -123,8 +141,9 @@ const ScrollReveal = ({
   children,
   className = '',
   delay = 0,
-  variant = 'fade-up',
+  variant = 'default',
   duration = 0.6,
+  divider = false,
 }: ScrollRevealProps) => {
   const { ref, visible } = useInView(0.15);
   const reducedMotion = usePrefersReducedMotion();
@@ -135,6 +154,18 @@ const ScrollReveal = ({
 
   return (
     <div ref={ref} className={className} style={styles}>
+      {divider && (
+        <div
+          className="h-[2px] mb-6 mx-auto rounded-full"
+          style={{
+            maxWidth: '600px',
+            background: 'hsl(154, 43%, 18%)',
+            transform: reducedMotion || visible ? 'scaleX(1)' : 'scaleX(0)',
+            transformOrigin: 'left',
+            transition: reducedMotion ? 'none' : `transform 0.5s ${EASING} ${delay}s`,
+          }}
+        />
+      )}
       {children}
     </div>
   );
