@@ -99,7 +99,7 @@ function LocationPin({ name, x, z }: { name: string; x: number; z: number }) {
       {/* Pulse ring */}
       <mesh ref={ringRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.25, 0]}>
         <ringGeometry args={[0.12, 0.15, 24]} />
-        <meshBasicMaterial color="#E85D24" transparent opacity={0.3} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#84CC16" transparent opacity={0.3} side={THREE.DoubleSide} />
       </mesh>
       {/* Tooltip */}
       <Html position={[0, 0.35, 0]} center distanceFactor={5} style={{ pointerEvents: 'none', opacity: hovered ? 1 : 0, transition: 'opacity 0.2s' }}>
