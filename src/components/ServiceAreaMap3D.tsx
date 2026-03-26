@@ -84,8 +84,8 @@ function LocationPin({ name, x, z }: { name: string; x: number; z: number }) {
       <mesh>
         <sphereGeometry args={[0.1, 12, 12]} />
         <meshStandardMaterial
-          color="#E85D24"
-          emissive="#E85D24"
+          color="#84CC16"
+          emissive="#84CC16"
           emissiveIntensity={hovered ? 1.2 : 0.5}
           roughness={0.2}
           metalness={0.4}
@@ -94,12 +94,12 @@ function LocationPin({ name, x, z }: { name: string; x: number; z: number }) {
       {/* Pin stem */}
       <mesh position={[0, -0.15, 0]}>
         <cylinderGeometry args={[0.02, 0.02, 0.2, 6]} />
-        <meshStandardMaterial color="#E85D24" roughness={0.4} />
+        <meshStandardMaterial color="#84CC16" roughness={0.4} />
       </mesh>
       {/* Pulse ring */}
       <mesh ref={ringRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.25, 0]}>
         <ringGeometry args={[0.12, 0.15, 24]} />
-        <meshBasicMaterial color="#E85D24" transparent opacity={0.3} side={THREE.DoubleSide} />
+        <meshBasicMaterial color="#84CC16" transparent opacity={0.3} side={THREE.DoubleSide} />
       </mesh>
       {/* Tooltip */}
       <Html position={[0, 0.35, 0]} center distanceFactor={5} style={{ pointerEvents: 'none', opacity: hovered ? 1 : 0, transition: 'opacity 0.2s' }}>

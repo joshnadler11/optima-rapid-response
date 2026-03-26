@@ -1,25 +1,25 @@
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 
-const bugs = ['🪳', '🐜', '🪲', '🕷️', '🪳', '🐜'];
-
 export default function PestSceneMobile() {
   const ref = useRef<HTMLDivElement>(null);
   const [triggered, setTriggered] = useState(false);
-  const [scattered, setScattered] = useState(false);
+  const [showShield, setShowShield] = useState(false);
+  const [showRing, setShowRing] = useState(false);
   const [showText, setShowText] = useState(false);
   const [showButton, setShowButton] = useState(false);
   const hasTriggered = useRef(false);
 
   const runAnimation = useCallback(() => {
     setTriggered(true);
-    setScattered(false);
+    setShowShield(false);
+    setShowRing(false);
     setShowText(false);
     setShowButton(false);
-    // Bugs crawl in for ~0.8s, then shield drops and bugs scatter
-    setTimeout(() => setScattered(true), 800);
-    setTimeout(() => setShowText(true), 1400);
-    setTimeout(() => setShowButton(true), 1900);
+    setTimeout(() => setShowShield(true), 300);
+    setTimeout(() => setShowRing(true), 600);
+    setTimeout(() => setShowText(true), 900);
+    setTimeout(() => setShowButton(true), 1200);
   }, []);
 
   useEffect(() => {
@@ -43,65 +43,61 @@ export default function PestSceneMobile() {
     setTimeout(() => runAnimation(), 50);
   };
 
-  // Scatter directions for each bug
-  const scatterTransforms = [
-    'translate(-200px, -120px) rotate(-340deg)',
-    'translate(220px, -80px) rotate(290deg)',
-    'translate(-180px, 100px) rotate(-260deg)',
-    'translate(200px, 130px) rotate(310deg)',
-    'translate(-250px, -40px) rotate(-380deg)',
-    'translate(230px, -110px) rotate(350deg)',
-  ];
-
   return (
     <section
       ref={ref}
       className="relative w-full overflow-hidden flex flex-col items-center justify-center"
       style={{ backgroundColor: '#0D2B1E', minHeight: '360px', padding: '2rem 1rem' }}
     >
-      {/* Bug + shield arena */}
-      <div className="relative w-full max-w-xs h-40 flex items-center justify-center mb-6">
-        {/* Bugs */}
-        {bugs.map((emoji, i) => (
-          <span
+      {/* Floating particles */}
+      <div className="absolute inset-0 overflow-hidden">
+        {Array.from({ length: 20 }).map((_, i) => (
+          <div
             key={i}
-            className="absolute text-3xl"
+            className="absolute rounded-full"
             style={{
-              left: `${10 + i * 14}%`,
-              bottom: '10%',
-              transform: triggered && !scattered
-                ? 'translateX(0)'
-                : scattered
-                ? scatterTransforms[i]
-                : 'translateX(-120px)',
-              opacity: triggered && !scattered ? 1 : scattered ? 0 : 0,
-              transition: scattered
-                ? 'transform 0.6s cubic-bezier(0.2,1,0.3,1), opacity 0.4s ease-out 0.2s'
-                : 'transform 0.6s cubic-bezier(0.16,1,0.3,1) ' + (i * 0.08) + 's, opacity 0.3s ease-out ' + (i * 0.08) + 's',
+              width: `${3 + Math.random() * 5}px`,
+              height: `${3 + Math.random() * 5}px`,
+              background: 'hsl(82, 85%, 45%)',
+              opacity: triggered ? 0.4 : 0,
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              transition: `opacity 0.8s ease-out ${i * 0.05}s`,
+              animation: triggered ? `float-particle ${3 + Math.random() * 4}s ease-in-out infinite ${i * 0.2}s` : 'none',
             }}
-          >
-            {emoji}
-          </span>
+          />
         ))}
+      </div>
 
+      {/* Shield + pulse ring */}
+      <div className="relative flex items-center justify-center mb-6" style={{ width: '120px', height: '120px' }}>
+        {/* Pulse ring */}
+        <div
+          className="absolute rounded-full border-2"
+          style={{
+            borderColor: 'hsl(82, 85%, 45%)',
+            width: showRing ? '200px' : '60px',
+            height: showRing ? '200px' : '60px',
+            opacity: showRing ? 0 : 0.6,
+            transition: 'all 1.2s ease-out',
+          }}
+        />
         {/* Shield */}
         <div
-          className="absolute text-7xl select-none"
+          className="text-7xl select-none"
           style={{
-            transform: scattered ? 'translateY(0) scale(1)' : 'translateY(-100px) scale(0.5)',
-            opacity: scattered ? 1 : 0,
+            transform: showShield ? 'translateY(0) scale(1)' : 'translateY(-40px) scale(0.5)',
+            opacity: showShield ? 1 : 0,
             transition: 'transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.3s ease-out',
-            filter: scattered ? 'drop-shadow(0 0 16px rgba(232, 93, 36, 0.6))' : 'none',
-            lineHeight: 1,
+            filter: showShield ? 'drop-shadow(0 0 20px hsla(82, 85%, 45%, 0.5))' : 'none',
           }}
         >
           🛡️
         </div>
       </div>
 
-      {/* Text */}
       <h3
-        className="font-display text-2xl font-bold text-primary-foreground text-center mb-4"
+        className="font-display text-2xl font-bold text-primary-foreground text-center mb-4 relative z-10"
         style={{
           opacity: showText ? 1 : 0,
           transform: showText ? 'translateY(0)' : 'translateY(12px)',
@@ -113,7 +109,7 @@ export default function PestSceneMobile() {
 
       <Link
         to="/quote"
-        className="inline-flex items-center justify-center bg-accent text-accent-foreground font-bold text-lg px-8 h-14 rounded-md hover:brightness-110 transition-all active:scale-[0.97] shadow-lg shadow-accent/30 animate-cta-pulse"
+        className="relative z-10 inline-flex items-center justify-center bg-accent text-accent-foreground font-bold text-lg px-8 h-14 rounded-md hover:brightness-110 transition-all active:scale-[0.97] shadow-lg shadow-accent/30 animate-cta-pulse"
         style={{
           opacity: showButton ? 1 : 0,
           transform: showButton ? 'translateY(0)' : 'translateY(8px)',
@@ -123,13 +119,21 @@ export default function PestSceneMobile() {
         Get a Free Quote
       </Link>
 
-      {/* Replay */}
       <button
         onClick={replay}
         className="absolute bottom-3 right-3 z-20 bg-muted-foreground/20 hover:bg-muted-foreground/40 text-primary-foreground text-xs font-medium px-3 py-1.5 rounded-full transition-colors active:scale-95"
       >
         ↻ Replay
       </button>
+
+      <style>{`
+        @keyframes float-particle {
+          0%, 100% { transform: translateY(0px) translateX(0px); }
+          25% { transform: translateY(-8px) translateX(4px); }
+          50% { transform: translateY(-3px) translateX(-3px); }
+          75% { transform: translateY(-10px) translateX(2px); }
+        }
+      `}</style>
     </section>
   );
 }
