@@ -1,10 +1,11 @@
 import { Star } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
+import happyClientImg from '@/assets/happy-client.jpg';
 
 const reviews = [
-  { text: 'We had a sudden bed bug issue in our apartment downtown and called three companies. Optima responded the fastest, beat the lowest price, and showed up that same afternoon. Highly recommend.', name: 'Sarah L.', location: 'Montreal' },
-  { text: "I sent them a competitor estimate for a cockroach problem and they didn't just beat the price, they explained what the other company missed. Licensed, on time, and respectful. We haven't seen a trace since.", name: 'Karim B.', location: 'Laval' },
-  { text: 'I manage several rental units and Optima is my go-to for any extermination issue. Quick to respond, professional with tenants, fair pricing every single time.', name: 'Roberto M.', location: 'Property Manager, Plateau' },
+  { text: 'Optima responded fastest, beat the lowest price, and showed up same afternoon. Highly recommend.', name: 'Sarah L.', location: 'Montreal' },
+  { text: "They didn't just beat the price — they explained what the competitor missed. Haven't seen a trace since.", name: 'Karim B.', location: 'Laval' },
+  { text: 'My go-to for all rental units. Quick, professional, fair pricing every time.', name: 'Roberto M.', location: 'Plateau' },
 ];
 
 const Testimonials = () => (
@@ -12,7 +13,7 @@ const Testimonials = () => (
     <div className="container">
       <ScrollReveal className="text-center mb-14" variant="fade-scale" divider>
         <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
-          What Our Montreal Clients Say
+          What Our Clients Say
         </h2>
       </ScrollReveal>
 
@@ -34,6 +35,13 @@ const Testimonials = () => (
           </ScrollReveal>
         ))}
       </div>
+
+      {/* Happy client photo */}
+      <ScrollReveal className="mt-12" delay={0.3}>
+        <div className="rounded-xl overflow-hidden shadow-lg max-w-md mx-auto">
+          <img src={happyClientImg} alt="Satisfied client in pest-free home" loading="lazy" width={800} height={544} className="w-full h-auto object-cover" />
+        </div>
+      </ScrollReveal>
     </div>
   </section>
 );
