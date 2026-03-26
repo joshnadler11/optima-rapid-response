@@ -94,7 +94,7 @@ function LocationPin({ name, x, z }: { name: string; x: number; z: number }) {
       {/* Pin stem */}
       <mesh position={[0, -0.15, 0]}>
         <cylinderGeometry args={[0.02, 0.02, 0.2, 6]} />
-        <meshStandardMaterial color="#E85D24" roughness={0.4} />
+        <meshStandardMaterial color="#84CC16" roughness={0.4} />
       </mesh>
       {/* Pulse ring */}
       <mesh ref={ringRef} rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.25, 0]}>
