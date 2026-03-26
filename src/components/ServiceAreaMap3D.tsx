@@ -84,8 +84,8 @@ function LocationPin({ name, x, z }: { name: string; x: number; z: number }) {
       <mesh>
         <sphereGeometry args={[0.1, 12, 12]} />
         <meshStandardMaterial
-          color="#E85D24"
-          emissive="#E85D24"
+          color="#84CC16"
+          emissive="#84CC16"
           emissiveIntensity={hovered ? 1.2 : 0.5}
           roughness={0.2}
           metalness={0.4}
