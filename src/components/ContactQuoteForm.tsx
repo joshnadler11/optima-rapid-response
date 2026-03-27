@@ -17,7 +17,7 @@ const ContactQuoteForm = () => {
     setForm({ ...form, [field]: e.target.value });
 
   return (
-    <section id="quote-form" className="py-12 md:py-20 bg-secondary">
+    <section id="quote-form" className="py-12 md:py-20 bg-secondary" aria-labelledby="quote-heading">
       <div className="container">
         <ScrollReveal divider className="mb-8"><span /></ScrollReveal>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-2xl shadow-foreground/10">
