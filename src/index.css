@@ -54,6 +54,14 @@
   p {
     text-wrap: pretty;
   }
+  /* Smooth scrolling with reduced-motion respect */
+  html {
+    scroll-behavior: smooth;
+  }
+  /* Improve image rendering */
+  img {
+    content-visibility: auto;
+  }
 }
 
 @layer utilities {
@@ -132,6 +140,7 @@
 
 /* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

@@ -39,7 +39,7 @@ const Testimonials = () => (
       {/* Happy client photo */}
       <ScrollReveal className="mt-12" delay={0.3}>
         <div className="rounded-xl overflow-hidden shadow-lg max-w-md mx-auto">
-          <img src={happyClientImg} alt="Satisfied client in pest-free home" loading="lazy" width={800} height={544} className="w-full h-auto object-cover" />
+          <img src={happyClientImg} alt="Happy Montreal homeowner after successful pest control treatment by Optima" loading="lazy" decoding="async" width={800} height={544} className="w-full h-auto object-cover" />
         </div>
       </ScrollReveal>
     </div>

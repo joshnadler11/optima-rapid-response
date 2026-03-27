@@ -84,7 +84,7 @@ const ServicesSection = () => (
       {/* Team in action photo */}
       <ScrollReveal className="mt-12" delay={0.3}>
         <div className="rounded-xl overflow-hidden shadow-lg max-w-2xl mx-auto">
-          <img src={teamActionImg} alt="Optima technician treating a home" loading="lazy" width={800} height={544} className="w-full h-auto object-cover" />
+          <img src={teamActionImg} alt="Optima Extermination technician performing pest treatment in a Montreal home" loading="lazy" width={800} height={544} decoding="async" className="w-full h-auto object-cover" />
         </div>
       </ScrollReveal>
     </div>

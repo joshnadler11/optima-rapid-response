@@ -28,7 +28,7 @@ const ContactQuoteForm = () => {
 
               {/* Team photo */}
               <div className="rounded-lg overflow-hidden mb-6">
-                <img src={teamAction2Img} alt="Optima team inspecting a property" loading="lazy" width={800} height={544} className="w-full h-auto object-cover" />
+                <img src={teamAction2Img} alt="Optima Extermination team inspecting a Montreal property for pests" loading="lazy" decoding="async" width={800} height={544} className="w-full h-auto object-cover" />
               </div>
 
               <div className="space-y-3 mb-6">
