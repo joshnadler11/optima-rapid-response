@@ -6,7 +6,7 @@ const HeroBackground3D = lazy(() => import('./HeroBackground3D'));
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#0A1F13' }}>
+    <section className="relative min-h-[90vh] flex items-center justify-center overflow-hidden" style={{ backgroundColor: '#0A1F13' }} aria-label="Hero">
       {/* 3D canvas background */}
       <Suspense fallback={null}>
         <HeroBackground3D />

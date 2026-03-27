@@ -17,18 +17,18 @@ const ContactQuoteForm = () => {
     setForm({ ...form, [field]: e.target.value });
 
   return (
-    <section id="quote-form" className="py-12 md:py-20 bg-secondary">
+    <section id="quote-form" className="py-12 md:py-20 bg-secondary" aria-labelledby="quote-heading">
       <div className="container">
         <ScrollReveal divider className="mb-8"><span /></ScrollReveal>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-2xl shadow-foreground/10">
           <ScrollReveal variant="slide-left" duration={0.5}>
             <div className="bg-primary p-8 md:p-12 text-primary-foreground h-full flex flex-col justify-center">
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">Free Quote in 30 Minutes</h2>
+              <h2 id="quote-heading" className="font-display text-3xl md:text-4xl font-bold mb-3">Free Quote in 30 Minutes</h2>
               <p className="text-primary-foreground/80 mb-6">We respond faster than any competitor.</p>
 
               {/* Team photo */}
               <div className="rounded-lg overflow-hidden mb-6">
-                <img src={teamAction2Img} alt="Optima team inspecting a property" loading="lazy" width={800} height={544} className="w-full h-auto object-cover" />
+                <img src={teamAction2Img} alt="Optima Extermination team inspecting a Montreal property for pests" loading="lazy" decoding="async" width={800} height={544} className="w-full h-auto object-cover" />
               </div>
 
               <div className="space-y-3 mb-6">

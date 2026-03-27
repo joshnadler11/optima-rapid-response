@@ -38,6 +38,7 @@ const TrustBadges = () => {
       ref={ref}
       className="bg-primary"
       style={{ height: '90px' }}
+      aria-label="Trust badges"
     >
       <div className="container h-full">
         <div className="grid grid-cols-2 md:grid-cols-4 h-full">

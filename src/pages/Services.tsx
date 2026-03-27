@@ -1,3 +1,4 @@
+import SEOHead from '@/components/SEOHead';
 import EmergencyBar from '@/components/EmergencyBar';
 import Navbar from '@/components/Navbar';
 import ServicesSection from '@/components/ServicesSection';
@@ -8,6 +9,11 @@ import FloatingButtons from '@/components/FloatingButtons';
 
 const Services = () => (
   <>
+    <SEOHead
+      title="Pest Control Services Montreal | Optima Extermination"
+      description="Bed bug removal, cockroach extermination, rodent control & more. Licensed technicians, same-day service across Greater Montreal. Free quotes."
+      canonical="/services"
+    />
     <EmergencyBar />
     <Navbar />
     <section className="bg-primary py-20">

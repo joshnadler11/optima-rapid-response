@@ -7,18 +7,32 @@
     <meta name="description" content="Extermination certifiée à Montréal. Punaises de lit, coquerelles, rongeurs et plus. Service le jour même. On bat tout soumis. Appelez (514) 458-0805.">
     <link rel="canonical" href="https://optimaextermination.com" />
 
-    
-    
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b150881d-22af-44b2-b950-0cfbc5ce9569/id-preview-89ca8f76--8d8a305e-3d7a-49ab-be70-ee1d18863ec0.lovable.app-1774229131844.png">
+    <!-- Preconnect to Google Fonts for faster font loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
+    <!-- DNS prefetch for external resources -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Extermination Montréal | Service le Jour Même | Optima Extermination">
+    <meta property="og:description" content="Extermination certifiée à Montréal. Punaises de lit, coquerelles, rongeurs et plus. Service le jour même. On bat tout soumis. Appelez (514) 458-0805.">
+    <meta property="og:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b150881d-22af-44b2-b950-0cfbc5ce9569/id-preview-89ca8f76--8d8a305e-3d7a-49ab-be70-ee1d18863ec0.lovable.app-1774229131844.png">
+    <meta property="og:url" content="https://optimaextermination.com" />
+
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Extermination Montréal | Service le Jour Même | Optima Extermination">
+    <meta name="twitter:description" content="Extermination certifiée à Montréal. Punaises de lit, coquerelles, rongeurs et plus. Service le jour même. On bat tout soumis. Appelez (514) 458-0805.">
     <meta name="twitter:image" content="https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b150881d-22af-44b2-b950-0cfbc5ce9569/id-preview-89ca8f76--8d8a305e-3d7a-49ab-be70-ee1d18863ec0.lovable.app-1774229131844.png">
 
+    <!-- Structured Data: LocalBusiness + FAQ -->
     <script type="application/ld+json">
-    {
+    [{
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
+      "@type": "PestControlService",
       "name": "Optima Extermination",
       "telephone": "(514) 458-0805",
       "email": "optimaextermination@gmail.com",
@@ -28,17 +42,77 @@
         "addressRegion": "QC",
         "addressCountry": "CA"
       },
-      "areaServed": "Greater Montreal",
-      "openingHours": "Mo-Su 00:00-23:59",
+      "areaServed": ["Montreal", "Laval", "Longueuil", "Brossard", "South Shore", "North Shore"],
+      "openingHoursSpecification": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      },
       "url": "https://optimaextermination.com",
-      "description": "Professional pest control services in Greater Montreal. Same-day service, licensed technicians, price beat guarantee."
-    }
+      "description": "Professional pest control services in Greater Montreal. Same-day service, licensed technicians, price beat guarantee.",
+      "priceRange": "$$",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "5",
+        "reviewCount": "500"
+      },
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Pest Control Services",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Bed Bug Removal"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Cockroach Extermination"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Ant Control"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Rodent Control"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Wasp & Hornet Removal"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "General Pest Control"}}
+        ]
+      }
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How fast can you respond to a pest emergency in Montreal?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We respond within 30 minutes and offer same-day service across Greater Montreal, 24/7."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you offer a price beat guarantee?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Show us any licensed competitor's quote and we guarantee to beat it."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What areas do you serve?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We serve all of Greater Montreal including Montreal, Laval, Longueuil, Brossard, South Shore, and North Shore."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are your technicians licensed?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. All technicians hold valid Quebec extermination permits and are fully insured."
+          }
+        }
+      ]
+    }]
     </script>
-    <meta property="og:title" content="Extermination Montréal | Service le Jour Même | Optima Extermination">
-  <meta name="twitter:title" content="Extermination Montréal | Service le Jour Même | Optima Extermination">
-  <meta property="og:description" content="Extermination certifiée à Montréal. Punaises de lit, coquerelles, rongeurs et plus. Service le jour même. On bat tout soumis. Appelez (514) 458-0805.">
-  <meta name="twitter:description" content="Extermination certifiée à Montréal. Punaises de lit, coquerelles, rongeurs et plus. Service le jour même. On bat tout soumis. Appelez (514) 458-0805.">
-</head>
+
+    <!-- Theme color for mobile browsers -->
+    <meta name="theme-color" content="#1a3a28" />
+  </head>
 
   <body>
     <div id="root"></div>

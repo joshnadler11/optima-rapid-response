@@ -1,3 +1,4 @@
+import SEOHead from '@/components/SEOHead';
 import EmergencyBar from '@/components/EmergencyBar';
 import Navbar from '@/components/Navbar';
 import SiteFooter from '@/components/SiteFooter';
@@ -7,6 +8,11 @@ import ServiceAreas from '@/components/ServiceAreas';
 
 const Contact = () => (
   <>
+    <SEOHead
+      title="Contact Optima Extermination | Montreal Pest Control"
+      description="Get a free pest control quote in 30 minutes. We respond 24/7 across Greater Montreal. Call (514) 458-0805 or fill out our form."
+      canonical="/contact"
+    />
     <EmergencyBar />
     <Navbar />
     <section className="bg-primary py-20">

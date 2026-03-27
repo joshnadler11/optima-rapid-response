@@ -53,10 +53,10 @@ function TiltCard({ children, bobDuration, index }: { children: React.ReactNode;
 }
 
 const ServicesSection = () => (
-  <section className="py-12 md:py-20 bg-background">
+  <section className="py-12 md:py-20 bg-background" aria-labelledby="services-heading">
     <div className="container">
       <ScrollReveal className="text-center mb-14" variant="fade-scale" duration={0.5} divider>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+        <h2 id="services-heading" className="font-display text-3xl md:text-4xl font-bold text-primary">
           Pest Control Services in Greater Montreal
         </h2>
       </ScrollReveal>
@@ -84,7 +84,7 @@ const ServicesSection = () => (
       {/* Team in action photo */}
       <ScrollReveal className="mt-12" delay={0.3}>
         <div className="rounded-xl overflow-hidden shadow-lg max-w-2xl mx-auto">
-          <img src={teamActionImg} alt="Optima technician treating a home" loading="lazy" width={800} height={544} className="w-full h-auto object-cover" />
+          <img src={teamActionImg} alt="Optima Extermination technician performing pest treatment in a Montreal home" loading="lazy" width={800} height={544} decoding="async" className="w-full h-auto object-cover" />
         </div>
       </ScrollReveal>
     </div>

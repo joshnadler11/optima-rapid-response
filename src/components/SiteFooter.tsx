@@ -3,7 +3,7 @@ import { Phone, Mail, MapPin, Facebook, Instagram } from 'lucide-react';
 import ScrollReveal from './ScrollReveal';
 
 const SiteFooter = () => (
-  <footer className="bg-primary text-primary-foreground">
+  <footer className="bg-primary text-primary-foreground" role="contentinfo">
     <ScrollReveal>
       <div className="container py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">

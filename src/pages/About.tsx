@@ -1,3 +1,4 @@
+import SEOHead from '@/components/SEOHead';
 import EmergencyBar from '@/components/EmergencyBar';
 import Navbar from '@/components/Navbar';
 import SiteFooter from '@/components/SiteFooter';
@@ -15,6 +16,11 @@ const values = [
 
 const About = () => (
   <>
+    <SEOHead
+      title="About Optima Extermination | Montreal Pest Control"
+      description="Licensed, insured pest control in Montreal. Same-day response, discreet service, guaranteed results. Learn why Montreal trusts Optima."
+      canonical="/about"
+    />
     <EmergencyBar />
     <Navbar />
     <section className="bg-primary py-20">
@@ -26,10 +32,10 @@ const About = () => (
       </div>
     </section>
 
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-background" aria-labelledby="why-optima">
       <div className="container max-w-3xl">
         <ScrollReveal>
-          <h2 className="font-display text-3xl font-bold text-primary mb-6">Why Optima?</h2>
+          <h2 id="why-optima" className="font-display text-3xl font-bold text-primary mb-6">Why Optima?</h2>
           <p className="text-muted-foreground leading-relaxed mb-4">
             Optima Extermination was founded with one mission: provide Montreal homeowners and businesses with pest control
             that is fast, honest, and effective. We understand that dealing with pests is stressful, which is why we prioritize
@@ -44,16 +50,16 @@ const About = () => (
       </div>
     </section>
 
-    <section className="py-20 bg-secondary">
+    <section className="py-20 bg-secondary" aria-labelledby="our-values">
       <div className="container">
         <ScrollReveal className="text-center mb-14">
-          <h2 className="font-display text-3xl font-bold text-primary">Our Values</h2>
+          <h2 id="our-values" className="font-display text-3xl font-bold text-primary">Our Values</h2>
         </ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {values.map((v, i) => (
             <ScrollReveal key={v.title} delay={i * 0.1}>
               <div className="flex gap-4 bg-background rounded-lg p-6 border border-border">
-                <v.icon className="w-8 h-8 text-accent flex-shrink-0 mt-1" />
+                <v.icon className="w-8 h-8 text-accent flex-shrink-0 mt-1" aria-hidden="true" />
                 <div>
                   <h3 className="font-display text-lg font-bold text-primary mb-1">{v.title}</h3>
                   <p className="text-muted-foreground text-sm leading-relaxed">{v.desc}</p>
