@@ -23,7 +23,7 @@ const ContactQuoteForm = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 rounded-xl overflow-hidden shadow-2xl shadow-foreground/10">
           <ScrollReveal variant="slide-left" duration={0.5}>
             <div className="bg-primary p-8 md:p-12 text-primary-foreground h-full flex flex-col justify-center">
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-3">Free Quote in 30 Minutes</h2>
+              <h2 id="quote-heading" className="font-display text-3xl md:text-4xl font-bold mb-3">Free Quote in 30 Minutes</h2>
               <p className="text-primary-foreground/80 mb-6">We respond faster than any competitor.</p>
 
               {/* Team photo */}
