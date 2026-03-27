@@ -9,10 +9,10 @@ const reviews = [
 ];
 
 const Testimonials = () => (
-  <section className="py-12 md:py-20 bg-background">
+  <section className="py-12 md:py-20 bg-background" aria-labelledby="testimonials-heading">
     <div className="container">
       <ScrollReveal className="text-center mb-14" variant="fade-scale" divider>
-        <h2 className="font-display text-3xl md:text-4xl font-bold text-primary">
+        <h2 id="testimonials-heading" className="font-display text-3xl md:text-4xl font-bold text-primary">
           What Our Clients Say
         </h2>
       </ScrollReveal>
