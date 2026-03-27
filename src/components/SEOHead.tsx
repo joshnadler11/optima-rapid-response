@@ -1,41 +1,43 @@
-import { Helmet } from 'react-helmet-async';
+import { useEffect } from 'react';
 
 interface SEOHeadProps {
   title: string;
   description: string;
   canonical?: string;
-  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
-  ogImage?: string;
 }
 
-const DEFAULT_OG_IMAGE = 'https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/b150881d-22af-44b2-b950-0cfbc5ce9569/id-preview-89ca8f76--8d8a305e-3d7a-49ab-be70-ee1d18863ec0.lovable.app-1774229131844.png';
 const BASE_URL = 'https://optimaextermination.com';
 
-const SEOHead = ({ title, description, canonical, jsonLd, ogImage }: SEOHeadProps) => {
-  const fullCanonical = canonical ? `${BASE_URL}${canonical}` : BASE_URL;
-  const img = ogImage || DEFAULT_OG_IMAGE;
+const SEOHead = ({ title, description, canonical }: SEOHeadProps) => {
+  useEffect(() => {
+    document.title = title;
 
-  return (
-    <Helmet>
-      <title>{title}</title>
-      <meta name="description" content={description} />
-      <link rel="canonical" href={fullCanonical} />
-      <meta property="og:type" content="website" />
-      <meta property="og:title" content={title} />
-      <meta property="og:description" content={description} />
-      <meta property="og:url" content={fullCanonical} />
-      <meta property="og:image" content={img} />
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:title" content={title} />
-      <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={img} />
-      {jsonLd && (
-        <script type="application/ld+json">
-          {JSON.stringify(Array.isArray(jsonLd) ? jsonLd : jsonLd)}
-        </script>
-      )}
-    </Helmet>
-  );
+    const setMeta = (name: string, content: string, property = false) => {
+      const attr = property ? 'property' : 'name';
+      let el = document.querySelector(`meta[${attr}="${name}"]`) as HTMLMetaElement | null;
+      if (!el) {
+        el = document.createElement('meta');
+        el.setAttribute(attr, name);
+        document.head.appendChild(el);
+      }
+      el.content = content;
+    };
+
+    setMeta('description', description);
+    setMeta('og:title', title, true);
+    setMeta('og:description', description, true);
+    setMeta('twitter:title', title);
+    setMeta('twitter:description', description);
+
+    if (canonical) {
+      const fullCanonical = `${BASE_URL}${canonical}`;
+      setMeta('og:url', fullCanonical, true);
+      let link = document.querySelector('link[rel="canonical"]') as HTMLLinkElement | null;
+      if (link) link.href = fullCanonical;
+    }
+  }, [title, description, canonical]);
+
+  return null;
 };
 
 export default SEOHead;
